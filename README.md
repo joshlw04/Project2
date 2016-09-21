@@ -31,4 +31,5 @@ Mapping components and figuring out what components should have state
 ##Bonuses
 
 Sending an anonymous email to the recipient from JTYSK outlining the situation/complaint
+
 The ability for logged in users to comment on other posts
