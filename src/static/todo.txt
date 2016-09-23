@@ -1,0 +1,19 @@
+why does Atom tell me I can't write JSX in index.js?
+
+handleChange(e) {
+  const stateObj = {};
+  const stateKey = e.target.name;
+  stateObj[stateKey] = e.target.value;
+  this.setState(stateObj);
+}
+
+handleSubmit() {
+  const { username, password } = this.state;
+  firebase.auth()
+  .signInWithEmailAndPassword( username, password )
+  .catch((err) => {
+    const errorCode = err.code;
+    const errorMessage = err.message;
+    console.log(err);
+  })
+}
