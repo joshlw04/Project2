@@ -18,35 +18,36 @@ class Login extends Component {
   handleChangeOfInput(e) { // (e) is the event, in this case the input of characters into either the username or password field
     const stateObj = {}; // create an empty 'state'
     const stateKey = e.target.name; // assign a new variable to the 'name' attribute of the targeted event
-    stateObj[stateKey] = e.target.value; //
+    console.log(stateKey);
+    stateObj[stateKey] = e.target.value;
+    console.log(stateObj);
+
     this.setState(stateObj);
   }
 
 
   handleSubmitButton() {
-    const { username, password } = this.setState;
+    const { username, password } = this.state;
     firebase.auth()
     .signInWithEmailAndPassword(username, password)
     .catch((err) => {
-      const errorCode = err.code;
-      const errorMessage = err.message;
-      console.log(`${errorCode}: ${errorMessage}`);
+      console.log(err);
+    }).then(() => {
+      this.props.router.push('/home')
     });
   }
 
   render() {
-    return(
+    return (
       <div>
-      <h1>This is being rendered from the Login component</h1>
-
         <div id="register-form">
           <div>
             <input name="username" onChange={this.handleChangeOfInput} type="text" placeholder="User Email" />
           </div>
           <div>
-            <input name="password" onChange={this.handleChange} type="password" placeholder="Password (at least 6 characters)" />
+            <input name="password" onChange={this.handleChangeOfInput} type="password" placeholder="Password" />
           </div>
-          <button className="submit-button" onClick={this.handleSubmit}>Login</button>
+          <button className="submit-button" onClick={this.handleSubmitButton}>Login</button>
         </div>
       </div>
     );

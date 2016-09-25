@@ -28,7 +28,9 @@ class Register extends Component {
 
 
   handleSubmitButton() {
-    const { username, password } = this.setState;
+    console.log('handleSubmitButton method running');
+    const { username, password } = this.state;
+    console.log(username, password);
     firebase.auth()
     .createUserWithEmailAndPassword(username, password)
     .catch((err) => {
@@ -37,9 +39,9 @@ class Register extends Component {
       console.log(`${errorCode}: ${errorMessage}`);
     })
     .then((user) => {
-      firebase.database().ref('users')
+      firebase.database().ref('Complainers')
       .child(user.uid)
-      .set({ first_name: '', last_name: '', email: username });
+      .set({ username: username, email: '', userID: user.uid });
     })
     .then(() => {
       this.props.router.push('/home')
@@ -49,15 +51,14 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <h1>This is being rendered from the Register component</h1>
         <div id="register-form">
           <div>
             <input name="username" onChange={this.handleChangeOfInput} type="text" placeholder="Choose a User Email" />
           </div>
           <div>
-            <input name="password" onChange={this.handleChange} type="password" placeholder="Choose a Password (at least 6 characters)" />
+            <input name="password" onChange={this.handleChangeOfInput} type="password" placeholder="Choose a Password (at least 6 characters)" />
           </div>
-          <button className="submit-button" onClick={this.handleSubmit}>Register</button>
+          <button className="submit-button" onClick={this.handleSubmitButton}>Register</button>
         </div>
       </div>
     );

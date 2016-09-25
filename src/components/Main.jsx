@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import firebase from '../../firebase.config.js';
 
-
 const propTypes = {
-  children: React.PropTypes.element.isRequired,
+  children: React.PropTypes.element,
 };
 
 class Main extends Component {
@@ -14,6 +13,7 @@ class Main extends Component {
       loggedIn: false,
     };
     this.signOutUser = this.signOutUser.bind(this);
+    this.logInOrRegister = this.logInOrRegister.bind(this);
   }
 
   componentWillMount() {
@@ -44,7 +44,7 @@ class Main extends Component {
       );
     } else {
       return (
-        <div>
+        <div id="sign-out">
           <Link to="/" onClick={this.signOutUser}>Sign Out</Link>
         </div>
       );
@@ -55,9 +55,14 @@ class Main extends Component {
     return (
       <div id="main">
         <h1>Just thought you should know...</h1>
-        {this.logInOrRegister()}
+        {
+          this.logInOrRegister()
+        }
         <div>
           {this.props.children}
+        </div>
+        <div>
+          <Link to="/home" id="home">Go home</Link>
         </div>
       </div>
     );

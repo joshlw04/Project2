@@ -1,14 +1,21 @@
 import React from 'react';
 
-const Complaint = () => {
+const propTypes = {
+  recipient: React.PropTypes.string, // TODO: if i make these required, i get a warning. figure it out.
+  complaint: React.PropTypes.string,
+};
+
+const Complaint = ({ recipient, complaint }) => {
   return (
     <div>
-    <li className="complaint-item">Joe, you shouldn't wear that shirt to work.<br />
-      <span>Agree : 2 </span><br />
-      <span>Disagree : 4 </span>
-    </li>
+      <p>Hey { recipient }, { complaint }.</p>
     </div>
   );
 };
 
+Complaint.propTypes = propTypes;
+
 export default Complaint;
+
+
+// this needs the props from ComplaintForm: reciepient and complaint
