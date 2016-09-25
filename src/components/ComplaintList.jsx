@@ -22,6 +22,7 @@ class ComplaintList extends Component {
     request.get(baseURL)
     .then((response) => {
       const complaintData = response.body;
+      console.log(complaintData);
       let complaints = [];
       if (complaintData) {
         complaints = Object.keys(complaintData).map((id) => {
@@ -32,6 +33,7 @@ class ComplaintList extends Component {
             complaint: individualCompData.complaint,
           };
         });
+        console.log(complaints);
       }
       this.setState({ complaints });
     });
@@ -40,6 +42,7 @@ class ComplaintList extends Component {
   render() {
     const complaintElements = this.state.complaints.map((complaint, idx) => {
       return (
+
         <li className="complaint-item" key={idx}>
           <Complaint
             complaint={complaint.complaint}
