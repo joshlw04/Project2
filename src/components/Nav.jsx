@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import firebase from '../../firebase.config.js';
+import Login from './Auth/Login.jsx';
+import Home from './Home.jsx';
+
 
 const propTypes = {
   children: React.PropTypes.element,
@@ -14,6 +17,7 @@ class Nav extends Component {
     };
     this.signOutUser = this.signOutUser.bind(this);
     this.logInOrRegister = this.logInOrRegister.bind(this);
+    this.loginChangeState = this.loginChangeState.bind(this);
   }
 
   componentDidMount() {
@@ -39,7 +43,6 @@ class Nav extends Component {
       return (
         <div>
           <Link to="/login" id="login">Login or </Link>
-          <Link to="/" onClick={this.signOutUser}>Sign Out</Link>
           <Link to="/register" id="register"> Register</Link>
         </div>
       );
@@ -51,6 +54,10 @@ class Nav extends Component {
       );
     }
   }
+  loginChangeState() {
+    console.log('loginChangeState ran', this.state.loggedIn);
+    this.setState({ loggedIn: true });
+  }
 
   render() {
     return (
@@ -61,10 +68,11 @@ class Nav extends Component {
         }
         <div>
           {this.props.children}
+          { !this.state.loggedIn ? <Login changeLoginState={this.loginChangeState} /> : <Home /> }
         </div>
-        <div>
+        {/* <div>
           <Link to="/home" id="home">Go home</Link>
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -77,3 +85,13 @@ export default Nav;
 // TODO: still need a pass on {this.props.children}. not sure why I'm adding it. I know it has something to do with the Router, but im not 100% on how it is used and why I should use it.
 
 // TODO: http://jaketrent.com/post/set-state-in-callbacks-in-react/, error: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the Nav component. Maybe just have a popup come up
+
+/*
+
+inside render:
+
+{ !this.state.loggedIn ? <Login /> :}
+
+
+
+*/

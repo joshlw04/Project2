@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import firebase from '../../../firebase.config.js';
 
+const propTypes = {
+  changeLoginState: React.PropTypes.func,
+};
+
 class Login extends Component {
   constructor() {
     super();
@@ -21,22 +25,22 @@ class Login extends Component {
   }
 
   handleLoginSubmit() {
+    console.log('login submit button pressed');
     const { username, password } = this.state;
-    console.log(username, password);
     firebase.auth()
     .signInWithEmailAndPassword(username, password)
     .catch((err) => {
       console.log(err);
     }).then(() => {
-      this.props.router.push('/home')
+      this.props.changeLoginState;
+      this.props.router.push('/home');
     });
   }
 
   render() {
     return (
       <div>
-        <p>this is the Login component</p>
-        <div id="register-form">
+        <div id="">
           <div>
             <input name="username" onChange={this.handleChangeOfInput} type="text" placeholder="User Email" />
           </div>
@@ -50,6 +54,17 @@ class Login extends Component {
   }
 }
 
+Login.propTypes = propTypes;
+
 export default withRouter(Login);
 
 // TODO: is there a way to pass props to this component when no parent component is rendering it?
+
+
+
+/*
+Issues with Loin
+
+
+
+*/

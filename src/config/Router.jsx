@@ -11,17 +11,15 @@ import Register from '../components/Auth/Register.jsx';
 const Routes = () => {
   return (
     <Router history={hashHistory}>
-    <Route path="register" component={Register} />
-      <Route path="login" component={Login} />
       <Route path="/" component={App}>
         <Route path="home" component={Home} />
       </Route>
+      <Route path="register" component={Register} />
+      <Route path="login" component={Login} />
     </Router>
   );
 };
 
 export default Routes;
-
-// stateless component that tracks the routes of the components
 
 // onEnter={authorize}
