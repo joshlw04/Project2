@@ -10,24 +10,19 @@ class Login extends Component {
       password: '',
     };
     this.handleChangeOfInput = this.handleChangeOfInput.bind(this);
-    this.handleSubmitButton = this.handleSubmitButton.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
-
-// this function will take the input of both the username and password input fields and update the state for both.
 
   handleChangeOfInput(e) { // (e) is the event, in this case the input of characters into either the username or password field
     const stateObj = {}; // create an empty 'state'
     const stateKey = e.target.name; // assign a new variable to the 'name' attribute of the targeted event
-    console.log(stateKey);
     stateObj[stateKey] = e.target.value;
-    console.log(stateObj);
-
     this.setState(stateObj);
   }
 
-
-  handleSubmitButton() {
+  handleLoginSubmit() {
     const { username, password } = this.state;
+    console.log(username, password);
     firebase.auth()
     .signInWithEmailAndPassword(username, password)
     .catch((err) => {
@@ -40,6 +35,7 @@ class Login extends Component {
   render() {
     return (
       <div>
+        <p>this is the Login component</p>
         <div id="register-form">
           <div>
             <input name="username" onChange={this.handleChangeOfInput} type="text" placeholder="User Email" />
@@ -47,7 +43,7 @@ class Login extends Component {
           <div>
             <input name="password" onChange={this.handleChangeOfInput} type="password" placeholder="Password" />
           </div>
-          <button className="submit-button" onClick={this.handleSubmitButton}>Login</button>
+          <button className="submit-button" onClick={this.handleLoginSubmit}>Login</button>
         </div>
       </div>
     );
@@ -55,3 +51,5 @@ class Login extends Component {
 }
 
 export default withRouter(Login);
+
+// TODO: is there a way to pass props to this component when no parent component is rendering it?

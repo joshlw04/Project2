@@ -6,7 +6,7 @@ const propTypes = {
   children: React.PropTypes.element,
 };
 
-class Main extends Component {
+class Nav extends Component {
   constructor() {
     super();
     this.state = {
@@ -16,7 +16,7 @@ class Main extends Component {
     this.logInOrRegister = this.logInOrRegister.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     setTimeout(() => {
       firebase.auth().onAuthStateChanged((user) => {
         this.setState({
@@ -30,7 +30,7 @@ class Main extends Component {
     firebase.auth()
     .signOut()
     .then(() => {
-      console.log('User logged out');
+      this.setState({ loggedIn: false });
     });
   }
 
@@ -39,6 +39,7 @@ class Main extends Component {
       return (
         <div>
           <Link to="/login" id="login">Login or </Link>
+          <Link to="/" onClick={this.signOutUser}>Sign Out</Link>
           <Link to="/register" id="register"> Register</Link>
         </div>
       );
@@ -69,6 +70,10 @@ class Main extends Component {
   }
 }
 
-Main.propTypes = propTypes;
+Nav.propTypes = propTypes;
 
-export default Main;
+export default Nav;
+
+// TODO: still need a pass on {this.props.children}. not sure why I'm adding it. I know it has something to do with the Router, but im not 100% on how it is used and why I should use it.
+
+// TODO: http://jaketrent.com/post/set-state-in-callbacks-in-react/, error: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the Nav component. Maybe just have a popup come up

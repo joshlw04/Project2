@@ -3,50 +3,18 @@ import request from 'superagent';
 import Complaint from './Complaint.jsx';
 
 const propTypes = {
+  listOfComplaints: React.PropTypes.array,
 };
 
-class ComplaintList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      complaints: [],
-    };
-  }
-
-  componentDidMount() {
-    this.getComplaints();
-  }
-
-  getComplaints() {
-    const baseURL = 'https://jtysk-react-project2.firebaseio.com/complaints.json';
-    request.get(baseURL)
-    .then((response) => {
-      const complaintData = response.body;
-      console.log(complaintData);
-      let complaints = [];
-      if (complaintData) {
-        complaints = Object.keys(complaintData).map((id) => {
-          const individualCompData = complaintData[id];
-          return {
-            id,
-            recipient: individualCompData.recipient,
-            complaint: individualCompData.complaint,
-          };
-        });
-        console.log(complaints);
-      }
-      this.setState({ complaints });
-    });
-  }
-
+class ComplaintList extends Component { // TODO stateless component, but IDK how to pass in props if the component is just a const...
   render() {
-    const complaintElements = this.state.complaints.map((complaint, idx) => {
+    const complaintElements = this.props.listOfComplaints.map((complaint, idx) => {
       return (
-
         <li className="complaint-item" key={idx}>
           <Complaint
             complaint={complaint.complaint}
             recipient={complaint.recipient}
+            id={complaint.idx}
           />
         </li>
       );
@@ -54,6 +22,7 @@ class ComplaintList extends Component {
 
     return (
       <div id="window">
+      this is the ComplaintList component
         <ul>
           {complaintElements}
         </ul>
@@ -61,6 +30,7 @@ class ComplaintList extends Component {
     );
   }
 }
+
 
 ComplaintList.propTypes = propTypes;
 

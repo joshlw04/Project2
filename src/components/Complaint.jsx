@@ -18,4 +18,4 @@ Complaint.propTypes = propTypes;
 export default Complaint;
 
 
-// this needs the props from ComplaintForm: reciepient and complaint
+// this needs the props from ComplaintForm: recipient and complaint

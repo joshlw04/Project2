@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import firebase from '../../../firebase.config.js';
 
-const propTypes = {
-
-}
-
 class Register extends Component {
   constructor() {
     super();
