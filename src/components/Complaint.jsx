@@ -31,19 +31,3 @@ Complaint.propTypes = propTypes;
 export default Complaint;
 
 // TODO: if i make the propTypes required, i get a warning. figure it out.
-
-
-// this needs the props from ComplaintForm: recipient and complaint
-
-/*
- props passed to agree:
-agreeCount: React.PropTypes.number,
-handleAgreeClick: React.PropTypes.func,
-
-
-
-
-
-
-
-*/

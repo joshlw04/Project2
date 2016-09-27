@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 const propTypes = {
-  // userRecipient: React.PropTypes.string,
-  // userComplaint: React.PropTypes.string,
   handleInputChange: React.PropTypes.func,
   handleSubmit: React.PropTypes.func,
 };
@@ -36,6 +34,3 @@ class ComplaintForm extends Component {
 ComplaintForm.propTypes = propTypes;
 
 export default ComplaintForm;
-
-/*
-*/

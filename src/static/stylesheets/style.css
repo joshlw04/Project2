@@ -125,6 +125,10 @@ ul, li {
 .input:-ms-input-placeholder { color: black; }
 .input:-moz-placeholder { color: black; }
 
+.complaint-list {
+  min-height: 110vh;
+}
+
 .complaint-list > li {
 	padding: 2em;
 }

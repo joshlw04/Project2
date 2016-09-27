@@ -23,13 +23,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getComplaints();
-    // setTimeout(() => {
-    //   firebase.auth().onAuthStateChanged((user) => {
-    //     this.setState({
-    //       isLoggedIn: (!user),
-    //     });
-    //   });
-    // }, 200);
   }
 
   getComplaints() {
@@ -49,7 +42,6 @@ class App extends Component {
         });
       }
       this.setState({ complaints });
-      // console.log(this.state.complaints);
     });
   }
 
@@ -76,7 +68,6 @@ class App extends Component {
   }
 
   handleLoginSubmit() {
-    console.log('login submit button pressed');
     const { username, password } = this.state;
     firebase.auth()
     .signInWithEmailAndPassword(username, password)
@@ -84,14 +75,11 @@ class App extends Component {
       console.log(err);
     }).then(() => {
       this.setState({ isLoggedIn: true });
-      // this.props.router.push('/');
     });
   }
 
   handleRegisterSubmit() {
-    console.log('handleSubmitButton method running');
     const { username, password } = this.state;
-    console.log(username, password);
     firebase.auth()
     .createUserWithEmailAndPassword(username, password)
     .catch((err) => {
@@ -109,10 +97,7 @@ class App extends Component {
     });
   }
 
-
-
   logInChangeState() {
-    console.log('loginChangeState ran', this.state.isLoggedIn);
     this.setState({ isLoggedIn: true });
   }
 
@@ -122,24 +107,23 @@ class App extends Component {
     .then(() => {
       this.setState({ isLoggedIn: false });
     });
-    console.log('signOutUser called');
   }
 
   render() {
     return (
       <div>
         <div className="title-section">
-  	    	<div className="title-wrapper">
-  		    	<div className="title">
-  			    	JUST THOUGHT
-  			    	<br />
-  			    	YOU SHOULD KNOW..<br />
-  			    </div>
-  			    <div className="subtitle">
-  				    A website for people <br />
-  				    who don't like other people
-  				</div>
-  	    	</div>
+          <div className="title-wrapper">
+            <div className="title">
+              JUST THOUGHT
+              <br />
+              YOU SHOULD KNOW..<br />
+            </div>
+            <div className="subtitle">
+              A website for people <br />
+              who don't like other people
+            </div>
+          </div>
         </div>
         <Nav
           isLoggedIn={this.state.isLoggedIn}

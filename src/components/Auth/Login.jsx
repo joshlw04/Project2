@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
 const propTypes = {
-  // changeLoginState: React.PropTypes.func,
-  // isLoggedIn: React.PropTypes.bool,
-  // logInChangeState: React.PropTypes.func,
   handleChangeOfInput: React.PropTypes.func,
   handleLoginSubmit: React.PropTypes.func,
 
@@ -17,16 +14,7 @@ class Login extends Component {
       username: '',
       password: '',
     };
-    // this.handleChangeOfInput = this.handleChangeOfInput.bind(this);
-    // this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
-
-  // handleChangeOfInput(e) { // (e) is the event, in this case the input of characters into either the username or password field
-  //   const stateObj = {}; // create an empty 'state'
-  //   const stateKey = e.target.name; // assign a new variable to the 'name' attribute of the targeted event
-  //   stateObj[stateKey] = e.target.value;
-  //   this.setState(stateObj);
-  // }
 
   render() {
     return (

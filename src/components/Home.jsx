@@ -8,20 +8,20 @@ const propTypes = {
   listOfComplaints: React.PropTypes.array,
   handleSubmit: React.PropTypes.func,
   handleInputChange: React.PropTypes.func,
-  isLoggedIn: React.PropTypes.bool,  
+  isLoggedIn: React.PropTypes.bool,
 };
 
 class Home extends React.Component {
   render() {
     return (
       <div>
-      { this.props.isLoggedIn ?
-        <ComplaintForm
-          userComplaint={this.props.userComplaint}
-          userRecipient={this.props.userRecipient}
-          handleInputChange={this.props.handleInputChange}
-          handleSubmit={this.props.handleSubmit}
-        /> : <div></div> }
+        { this.props.isLoggedIn ?
+          <ComplaintForm
+            userComplaint={this.props.userComplaint}
+            userRecipient={this.props.userRecipient}
+            handleInputChange={this.props.handleInputChange}
+            handleSubmit={this.props.handleSubmit}
+          /> : <div></div> }
         <a name="you-should-know"></a>
         <ComplaintList
           listOfComplaints={this.props.listOfComplaints}
@@ -34,6 +34,3 @@ class Home extends React.Component {
 Home.propTypes = propTypes;
 
 export default Home;
-
-// stateless component that just renders the complaints in their various forms
-// will need conditional statement about showing ComplaintForm component if user is logged in or not

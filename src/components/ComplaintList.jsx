@@ -6,12 +6,12 @@ const propTypes = {
   listOfComplaints: React.PropTypes.array,
 };
 
-class ComplaintList extends Component { // TODO stateless component, but IDK how to pass in props if the component is just a const...
+class ComplaintList extends Component {
   render() {
     const complaintElements = this.props.listOfComplaints.map((complaint, idx) => {
       return (
         <li className="complaint" key={idx}>
-          <div className="complaint-wrapper">         
+          <div className="complaint-wrapper">
             <Complaint
               complaint={complaint.complaint}
               recipient={complaint.recipient}
@@ -37,4 +37,4 @@ ComplaintList.propTypes = propTypes;
 
 export default ComplaintList;
 
-// we need to pull down a method from Main to add complaints here
+// TODO stateless component, but IDK how to pass in props if the component is just a const...
