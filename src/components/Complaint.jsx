@@ -16,8 +16,11 @@ class Complaint extends Component {
   render() {
     return (
       <div>
-        <p>Hey { this.recipient }, { this.complaint }.</p>
         <Agree />
+        <div className="content">
+          <span className="recipient">{ this.recipient }</span>,
+          <span className="the-complaint"> { this.complaint }</span>
+        </div>
       </div>
     );
   }

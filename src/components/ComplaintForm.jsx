@@ -10,13 +10,24 @@ const propTypes = {
 class ComplaintForm extends Component {
   render() {
     return (
-      <div id="input-form">
-        <input type="text" name="recipient" id="recipient-input" placeholder="Who's got you miffed?" onChange={this.props.handleInputChange} />
-        <br />
-        <input type="text" name="complaint" id="complaint-input" placeholder="What should they know?" onChange={this.props.handleInputChange} />
-        <br />
-        <input type="submit" name="submit" id="submit" placeholder="Make Complaint" onClick={this.props.handleSubmit} />
-        <br />
+      <div className="complaint-form-wrapper">
+        <div className="complaint-form">
+
+          <div className="col-2">
+            <b>DEAR,</b>
+            <input type="text" name="recipient" id="recipient-input" className="input" placeholder="Person's Name" onChange={this.props.handleInputChange} />
+            <br />
+          </div>
+
+          <div className="col-2">
+            <b>JUST THOUGHT YOU SHOULD KNOW...</b>
+            <textarea type="text" name="complaint" className="input" id="complaint-input" rows="4" placeholder="What should they know?" onChange={this.props.handleInputChange} ></textarea>
+            <br />
+            <input type="submit" name="submit" id="submit" className="submit" placeholder="Submit" onClick={this.props.handleSubmit} />
+            <br />
+          </div>
+
+        </div>
       </div>
     );
   }

@@ -10,20 +10,21 @@ class ComplaintList extends Component { // TODO stateless component, but IDK how
   render() {
     const complaintElements = this.props.listOfComplaints.map((complaint, idx) => {
       return (
-        <li className="complaint-item" key={idx}>
-          <Complaint
-            complaint={complaint.complaint}
-            recipient={complaint.recipient}
-            id={complaint.idx}
-          />
+        <li className="complaint" key={idx}>
+          <div className="complaint-wrapper">         
+            <Complaint
+              complaint={complaint.complaint}
+              recipient={complaint.recipient}
+              id={complaint.idx}
+            />
+          </div>
         </li>
       );
     });
 
     return (
-      <div id="window">
-      this is the ComplaintList component
-        <ul>
+      <div>
+        <ul className="complaint-list">
           {complaintElements}
         </ul>
       </div>

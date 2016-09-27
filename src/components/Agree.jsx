@@ -30,10 +30,16 @@ class Agree extends Component {
   render() {
     return (
       <div className="like-button">
-        <p>{this.state.agreeCount}</p>
-        <button onClick={this.handleAgreeClick}>Agree</button>
-        <p>{this.state.disagreeCount}</p>
-        <button onClick={this.handleDisagreeClick}>Disagree</button>
+        <ul className="actions">
+          <li>
+            <i className="ion-ios-flame" onClick={this.handleAgreeClick}></i>
+            <span className="badge"> {this.state.agreeCount}</span>
+          </li>
+          <li>
+            <i className="ion-ios-snowy" onClick={this.handleDisagreeClick}></i>
+            <span className="badge"> {this.state.disagreeCount}</span>
+          </li>
+        </ul>
       </div>
     );
   }

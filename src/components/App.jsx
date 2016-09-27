@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import Home from './Home.jsx';
 import Nav from './Nav.jsx';
+import firebase from '../../firebase.config.js';
 
 class App extends Component {
   constructor() {
@@ -10,13 +11,25 @@ class App extends Component {
       complaints: [],
       complaint: '',
       recipient: '',
+      isLoggedIn: false,
     };
     this.handleChangeOfInput = this.handleChangeOfInput.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.logInChangeState = this.logInChangeState.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+    this.signOutUser = this.signOutUser.bind(this);
   }
 
   componentDidMount() {
     this.getComplaints();
+    // setTimeout(() => {
+    //   firebase.auth().onAuthStateChanged((user) => {
+    //     this.setState({
+    //       isLoggedIn: (!user),
+    //     });
+    //   });
+    // }, 200);
   }
 
   getComplaints() {
@@ -62,12 +75,82 @@ class App extends Component {
     });
   }
 
+  handleLoginSubmit() {
+    console.log('login submit button pressed');
+    const { username, password } = this.state;
+    firebase.auth()
+    .signInWithEmailAndPassword(username, password)
+    .catch((err) => {
+      console.log(err);
+    }).then(() => {
+      this.setState({ isLoggedIn: true });
+      // this.props.router.push('/');
+    });
+  }
+
+  handleRegisterSubmit() {
+    console.log('handleSubmitButton method running');
+    const { username, password } = this.state;
+    console.log(username, password);
+    firebase.auth()
+    .createUserWithEmailAndPassword(username, password)
+    .catch((err) => {
+      const errorCode = err.code;
+      const errorMessage = err.message;
+      console.log(`${errorCode}: ${errorMessage}`);
+    })
+    .then((user) => {
+      firebase.database().ref('Complainers')
+      .child(user.uid)
+      .set({ username: username, email: '', userID: user.uid });
+    })
+    .then(() => {
+      this.props.router.push('/home')
+    });
+  }
+
+
+
+  logInChangeState() {
+    console.log('loginChangeState ran', this.state.isLoggedIn);
+    this.setState({ isLoggedIn: true });
+  }
+
+  signOutUser() {
+    firebase.auth()
+    .signOut()
+    .then(() => {
+      this.setState({ isLoggedIn: false });
+    });
+    console.log('signOutUser called');
+  }
+
   render() {
     return (
       <div>
-        <p>This is the App component</p>
-        <Nav />
+        <div className="title-section">
+  	    	<div className="title-wrapper">
+  		    	<div className="title">
+  			    	JUST THOUGHT
+  			    	<br />
+  			    	YOU SHOULD KNOW..<br />
+  			    </div>
+  			    <div className="subtitle">
+  				    A website for people <br />
+  				    who don't like other people
+  				</div>
+  	    	</div>
+        </div>
+        <Nav
+          isLoggedIn={this.state.isLoggedIn}
+          logInChangeState={this.logInChangeState}
+          handleChangeOfInput={this.handleChangeOfInput}
+          handleLoginSubmit={this.handleLoginSubmit}
+          signOutUser={this.signOutUser}
+          handleRegisterSubmit={this.handleRegisterSubmit}
+        />
         <Home
+          isLoggedIn={this.state.isLoggedIn}
           userComplaint={this.state.complaint}
           userRecipient={this.state.recipient}
           listOfComplaints={this.state.complaints}
