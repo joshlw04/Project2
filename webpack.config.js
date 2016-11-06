@@ -24,7 +24,5 @@ module.exports = {
       },
     ],
   },
-  scripts: {
-    heroku-postbuild: 'webpack -p --config ./webpack.config.js --progress',
-  }
+
 };
